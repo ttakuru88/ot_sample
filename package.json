@@ -1,0 +1,12 @@
+{
+  "name": "ot_sample",
+  "version": "0.1.0",
+  "description": "",
+  "main": "server.js",
+  "author": "ttakuru88",
+  "dependencies": {
+    "express": "^4.15.4",
+    "ot": "github:operational-transformation/ot.js#44785613db107c6a1a514ddd3c0405f301c85ebb",
+    "socket.io": "^2.0.3"
+  }
+}
