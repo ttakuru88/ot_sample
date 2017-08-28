@@ -3,7 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <title>同時編集デモ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.29.0/codemirror.css">
     <style></style>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.29.0/codemirror.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ot.js/0.0.15/ot-min.js"></script>
+    <script>
+      var socket = io();
+
+      socket.on('doc', function(data) {
+        var cm = CodeMirror.fromTextArea(document.getElementById('note'), {lineNumbers: true})
+        cm.setValue(data.str)
+
+        var adapter = new ot.SocketIOAdapter(socket)
+        var cmAdapter = new ot.CodeMirrorAdapter(cm)
+        var client = new ot.EditorClient(data.revision, data.clients, adapter, cmAdapter)
+      })
+    </script>
   </head>
   <body>
     <textarea id="note"></textarea>
